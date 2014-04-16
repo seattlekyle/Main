@@ -11,12 +11,16 @@ namespace headspringtest
     {
         static void Main(string[] args)
         {
-            FizzBuzz fizzBuzz = new FizzBuzz();
-
-            foreach (string result in fizzBuzz.GetResults(
+            FizzBuzzHelper fizzBuzz = new FizzBuzzHelper(
                 1,
-                100, 
-                new CriteriaOutputInfo[] { new CriteriaOutputInfo(3, 5, "Fizz", "Buzz") }))
+                100,
+                new CriteriaOutputInfo[] 
+                { 
+                    new CriteriaOutputInfo(3, "Fizz"),
+                    new CriteriaOutputInfo(5, "Buzz")
+                });
+
+            foreach (string result in fizzBuzz.GetResults())
             {
                 Console.WriteLine(result);
             }

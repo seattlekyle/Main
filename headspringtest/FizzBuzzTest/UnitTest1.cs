@@ -11,40 +11,69 @@ namespace FizzBuzzTest
         [TestMethod]
         public void VerifyGetFullResultCountFor1_100()
         {
-            FizzBuzz buzz = new FizzBuzz();
-            int count = buzz.GetResults(1, 100, new CriteriaOutputInfo[] { new CriteriaOutputInfo(3, 5, "Fizz", "Buzz") }).Count();
+            FizzBuzzHelper buzz = new FizzBuzzHelper(
+                1, 
+                100, 
+                new CriteriaOutputInfo[] 
+                { 
+                    new CriteriaOutputInfo(3, "Fizz") ,
+                    new CriteriaOutputInfo(5, "Buzz")
+                });
+
+            int count = buzz.GetResults().Count();
             Assert.IsTrue(count == 100);
         }
 
         [TestMethod]
         public void VerifyThreeAndFiveAreFizzAndBuzz()
         {
-            FizzBuzz buzz = new FizzBuzz();
-            var results = buzz.GetResults(3, 5, new CriteriaOutputInfo[] { new CriteriaOutputInfo(3, 5, "Fizz", "Buzz") });
+            FizzBuzzHelper buzz = new FizzBuzzHelper(
+                3, 
+                5,
+                new CriteriaOutputInfo[] 
+                { 
+                    new CriteriaOutputInfo(3, "Fizz"),
+                    new CriteriaOutputInfo(5, "Buzz")
+                });
+
+            var results = buzz.GetResults();
             Assert.IsTrue(results.ElementAt(0) == "Fizz" && results.ElementAt(2) == "Buzz");
         }
 
         [TestMethod]
         public void VerifyFizzBuzz()
         {
-            FizzBuzz buzz = new FizzBuzz();
-            var results = buzz.GetResults(15, 15, new CriteriaOutputInfo[] { new CriteriaOutputInfo(3, 5, "Fizz", "Buzz") });
+            FizzBuzzHelper buzz = new FizzBuzzHelper(
+                15,
+                15,
+                new CriteriaOutputInfo[]
+                { 
+                    new CriteriaOutputInfo(3, "Fizz"),
+                    new CriteriaOutputInfo(5, "Buzz")
+                });
+
+            var results = buzz.GetResults();
             Assert.IsTrue(results.First() == "FizzBuzz");
         }
 
         [TestMethod]
         public void VerifyCharlieBravo()
         {
-            FizzBuzz buzz = new FizzBuzz();
-
-            var results = buzz.GetResults(15, 15, new CriteriaOutputInfo[] 
+            FizzBuzzHelper buzz = new FizzBuzzHelper(
+                15, 
+                15,
+                new CriteriaOutputInfo[] 
             { 
-                new CriteriaOutputInfo(3, 5, "Fizz", "Buzz"),
-                new CriteriaOutputInfo(3, 5, "Charlie", "Bravo")
+                new CriteriaOutputInfo(3, "Fizz"),
+                new CriteriaOutputInfo(5, "Buzz"),
+                new CriteriaOutputInfo(3, "Charlie"),
+                new CriteriaOutputInfo(5, "Bravo")
             });
 
-            Assert.IsTrue(results.ElementAt(0) == "FizzBuzz");
-            Assert.IsTrue(results.ElementAt(1) == "CharlieBravo");
+            var results = buzz.GetResults();
+
+            Assert.IsTrue(results.ElementAt(0) == "FizzBuzzCharlieBravo");
+            ////Assert.IsTrue(results.ElementAt(1) == "CharlieBravo");
         }
     }
 }
